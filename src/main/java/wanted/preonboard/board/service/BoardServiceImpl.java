@@ -3,16 +3,13 @@ package wanted.preonboard.board.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import wanted.preonboard.board.entity.BoardEntity;
 import wanted.preonboard.board.model.request.BoardCreateRequest;
 import wanted.preonboard.board.repository.BoardRepository;
 import wanted.preonboard.board.support.converter.BoardConverter;
-import wanted.preonboard.config.WebSecurityConfig;
-import wanted.preonboard.user.entity.UserEntity;
-import wanted.preonboard.user.model.Token;
-import wanted.preonboard.user.repository.UserRepository;
-import wanted.preonboard.user.support.converter.UserConverter;
-import wanted.preonboard.util.TokenGenerator;
 import wanted.preonboard.util.TokenResolver;
 
 import java.util.*;
@@ -29,5 +26,17 @@ public class BoardServiceImpl implements BoardService {
         Optional<Long> memberIdRe = tokenResolver.resolveToken(token);
         Long memberId = memberIdRe.get();
         boardRepository.save(BoardConverter.to(request,memberId));
+    }
+
+    @Override
+    public Page<BoardEntity> findList(Long BoardId,Pageable pageable) {
+        Page<BoardEntity> boardEntities=null;
+        if(BoardId == 0){
+            boardEntities = boardRepository.findAll(pageable);
+        }else{
+            boardEntities = boardRepository.findById(BoardId,pageable);
+        }
+
+        return boardEntities;
     }
 }
