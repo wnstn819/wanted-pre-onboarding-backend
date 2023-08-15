@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wanted.preonboard.board.entity.BoardEntity;
 import wanted.preonboard.board.model.request.BoardCreateRequest;
+import wanted.preonboard.board.model.request.BoardDeleteRequest;
 import wanted.preonboard.board.model.request.BoardUpdateRequest;
 import wanted.preonboard.board.service.BoardService;
 import wanted.preonboard.user.model.request.UserJoinRequest;
@@ -45,9 +46,8 @@ public class BoardController {
     }
 
     @DeleteMapping()
-    public ApiResponse<ApiResponse.SuccessBody<Void>> deleteBoard(@RequestBody UserJoinRequest request){
-
-
+    public ApiResponse<ApiResponse.SuccessBody<Void>> deleteBoard(@RequestHeader("Token") String token, @RequestBody BoardDeleteRequest request){
+        boardService.delete(token,request.getBoardId());
         return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.SUCCESS);
     }
 

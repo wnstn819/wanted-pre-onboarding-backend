@@ -54,4 +54,16 @@ public class BoardServiceImpl implements BoardService {
 
         return boardRepository.save(boardEntity);
     }
+
+    @Override
+    public void delete(String token, Long boardId) {
+        Optional<Long> memberIdRe = tokenResolver.resolveToken(token);
+        Long memberId = memberIdRe.get();
+        BoardEntity boardEntity = boardRepository.findById(boardId).orElseThrow(()-> new RuntimeException("찾는 게시글이 없습니다."));
+        if(Objects.equals(boardEntity.getCreateId(), memberId)){
+            boardRepository.delete(boardEntity);
+        }else{
+            throw new RuntimeException("본인이 생성한 게시글만 삭제할 수 있습니다.");
+        }
+    }
 }

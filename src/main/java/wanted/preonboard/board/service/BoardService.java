@@ -16,4 +16,6 @@ public interface BoardService {
 
     public BoardEntity update(String token, BoardUpdateRequest request);
 
+    public void delete(String token, Long boardId);
+
 }
