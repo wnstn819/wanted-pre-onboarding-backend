@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 public class TokenGenerator {
 
-    private static final String MEMBER_ID_CLAIM_KEY = "memberId";
+    private static final String MEMBER_ID_CLAIM_KEY = "userId";
     @Value("${spring.auth.jwt.secret_key}")
     private String secretKey;
     @Value("${spring.auth.jwt.access_time}")
