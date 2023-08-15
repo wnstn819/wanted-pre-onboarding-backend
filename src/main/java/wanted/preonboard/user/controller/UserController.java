@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import wanted.preonboard.user.model.Token;
 import wanted.preonboard.user.model.request.UserJoinRequest;
 import wanted.preonboard.user.service.UserService;
 import wanted.preonboard.user.support.ApiResponse;
@@ -31,10 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<ApiResponse.SuccessBody<Void>> userLogin(@RequestBody UserJoinRequest request){
-
-        userService.login(request.getEmail(),request.getPassword());
-
-        return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.SUCCESS);
+    public ApiResponse<ApiResponse.SuccessBody<Token>> userLogin(@RequestBody UserJoinRequest request){
+        return ApiResponseGenerator.success(userService.login(request.getEmail(),request.getPassword()),HttpStatus.OK, MessageCode.SUCCESS);
     }
 }

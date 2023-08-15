@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import wanted.preonboard.config.WebSecurityConfig;
 import wanted.preonboard.user.entity.UserEntity;
+import wanted.preonboard.user.model.Token;
 import wanted.preonboard.user.repository.UserRepository;
 import wanted.preonboard.user.support.converter.UserConverter;
+import wanted.preonboard.util.TokenGenerator;
 
 @RequiredArgsConstructor
 @Service
@@ -15,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final WebSecurityConfig webSecurityConfig;
+    private final TokenGenerator tokenGenerator;
 
     @Override
     public void join(String email, String password) {
@@ -48,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(String email, String password) {
+    public Token login(String email, String password) {
 
         if(validate(email,password)) {
 
@@ -59,7 +62,7 @@ public class UserServiceImpl implements UserService {
 
             if(pwcheck(password, userEntity.getPassowrd())){
                 //토큰 리턴
-                System.out.println("같다");
+                return tokenGenerator.generateToken(userEntity.getId());
             }else{
                 throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.!");
             }
@@ -67,6 +70,7 @@ public class UserServiceImpl implements UserService {
 
         }
 
+        return null;
     }
 
     @Override

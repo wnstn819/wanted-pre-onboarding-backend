@@ -1,5 +1,7 @@
 package wanted.preonboard.user.service;
 
+import wanted.preonboard.user.model.Token;
+
 public interface UserService {
     public void join(String email, String password);
 
@@ -7,7 +9,7 @@ public interface UserService {
 
     boolean duplicatedCheck(String email);
 
-    public void login(String email, String password);
+    public Token login(String email, String password);
 
     boolean pwcheck(String password, String dbPw);
 }
