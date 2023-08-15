@@ -1,4 +1,4 @@
-package wanted.wantedpreonboardingbackend;
+package wanted.preonboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
