@@ -14,7 +14,8 @@
 
 ### 6. API 명세(request/response 포함)
 
-**회원가입 (api/v1/join)**
+
+📌 회원가입 (api/v1/join) - POST
 
 - Request 
 ```
@@ -55,7 +56,7 @@
       ```
 
 
-**로그인 (api/v1/login)**
+📌 로그인 (api/v1/login) - POST
 
 - Request 
 ```
@@ -100,7 +101,258 @@
       }
       ```
 
+📌 게시글 생성 (api/v1/board) - POST
 
+- Request 
+```
+@RequestBody
+{
+    "title" : "test12",
+    "content" : "testContent"
+}
+
+@RequestHeader
+{
+    "Token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImlhdCI6MTY5MjEzNTczMywiZXhwIjoxNjkyMTM5MzMzfQ.5v1SgUMzj2hlgwH0CP8vqAFtne1FogqWyds4owk0jPw"
+}
+```
+
+- Response
+    - success
+      ```
+      {
+        "data": null,
+        "message": "성공",
+        "code": "success"
+      }
+      
+      ```
+    - fail
+      ```
+      ```
+
+
+📌 게시글 조회 (api/v1/board) - GET
+
+- Request 
+```
+page=0&size=10&boardId=0
+
+-> page : defulat = 0
+-> size : default = 10
+-> boardId : default = 0 , 0 = ALL, 1,2,3 ... 다른 숫자들은 해당 숫자의 Id를 가진 게시글 조회
+```
+
+- Response
+    - success
+      ```
+      page=0&size=10&boardId=0
+      
+      {
+        "data": {
+        "content": [
+                {
+                    "id": 13,
+                    "title": "test12",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 12,
+                    "title": "test11",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 11,
+                    "title": "test10",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 10,
+                    "title": "test9",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 9,
+                    "title": "test8",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 8,
+                    "title": "test7",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 7,
+                    "title": "test6",
+                    "content": "testContent",
+                        "createId": 3
+                },
+                {
+                    "id": 6,
+                    "title": "test5",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 4,
+                    "title": "test3",
+                    "content": "testContent",
+                    "createId": 3
+                },
+                {
+                    "id": 3,
+                    "title": "test2",
+                    "content": "testContent",
+                    "createId": 3
+                }
+            ],
+            "pageable": {
+                "sort": {
+                    "empty": false,
+                    "sorted": true,
+                    "unsorted": false
+                },
+                "offset": 0,
+                "pageNumber": 0,
+                "pageSize": 10,
+                "paged": true,
+                "unpaged": false
+            },
+            "last": false,
+            "totalPages": 2,
+            "totalElements": 12,
+            "first": true,
+            "size": 10,
+            "number": 0,
+            "sort": {
+                "empty": false,
+                "sorted": true,
+                    "unsorted": false
+            },
+            "numberOfElements": 10,
+            "empty": false
+        },
+        "message": "성공",
+        "code": "success"
+        }
+
+        ###########
+        boardId = 1
+        ###########
+      
+              {
+                "data": {
+                "content": [
+                    {
+                        "id": 1,
+                        "title": "test15",
+                        "content": "testContent",
+                        "createId": 3
+                    }
+                ],
+                "pageable": {
+                    "sort": {
+                        "empty": false,
+                        "unsorted": false,
+                        "sorted": true
+                    },
+                    "offset": 0,
+                    "pageNumber": 0,
+                    "pageSize": 10,
+                    "paged": true,
+                    "unpaged": false
+                },
+                "last": true,
+                "totalPages": 1,
+                "totalElements": 1,
+                "first": true,
+                "size": 10,
+                "number": 0,
+                "sort": {
+                    "empty": false,
+                    "unsorted": false,
+                    "sorted": true
+                },
+                "numberOfElements": 1,
+                "empty": false
+            },
+            "message": "성공",
+            "code": "success"
+        }
+      
+      ```
+    - fail
+      ```
+      ```
+
+📌 게시글 수정 (api/v1/board) - PUT
+
+- Request 
+```
+{
+    "boardId":2,
+    "content": "test",
+    "title" : "testtttt"
+}
+```
+
+- Response
+    - success
+      ```
+        {
+        "data": {
+            "id": 2,
+            "title": "testtttt",
+            "content": "test",
+            "createId": 3
+        },
+        "message": "성공",
+        "code": "success"
+        }
+      
+      ```
+    - fail
+      ```
+        {
+        "code": "fail",
+        "message": "본인이 생성한 게시글만 수정할 수 있습니다."
+        }
+      ```
+
+
+
+📌 게시글 삭제 (api/v1/board) - DELETE
+
+- Request 
+```
+{
+    "boardId":2,
+}
+```
+
+- Response
+    - success
+      ```
+       {
+        "data": null,
+        "message": "성공",
+        "code": "success"
+        }
+      
+      ```
+    - fail
+      ```
+        {
+        "code": "fail",
+        "message": "본인이 생성한 게시글만 삭제할 수 있습니다."
+        }
+      ```
 
 
 # 원티드 프리온보딩 백엔드 인턴십 - 선발 과제
