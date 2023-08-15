@@ -14,6 +14,93 @@
 
 ### 6. API 명세(request/response 포함)
 
+**회원가입 (api/v1/join)**
+
+- Request 
+```
+{
+    "email":"test@naver.com",
+    "password" : "123412357"
+}
+```
+
+- Response
+    - success
+      ```
+      {
+        "data": null,
+        "message": "성공",
+        "code": "success"    
+      }
+      
+      ```
+    - fail
+      ```
+      이메일 유효성 검사
+      {
+        "code": "fail",
+        "message": "이메일에 @가 포함되지 않았습니다. 다시 입력해주세요!"
+      }
+      비밀번호 유효성 검사
+      {
+        "code": "fail",
+        "message": "비밀번호를 8자 이상 입력해주세요!"
+      } 
+
+      이메일 중복 검사
+      {
+        "code": "fail",
+        "message": "이미 등록된 이메일이 있습니다."
+      }
+      ```
+
+
+**로그인 (api/v1/login)**
+
+- Request 
+```
+{
+    "email":"test@naver.com",
+    "password" : "123412357"
+}
+```
+
+- Response
+    - success
+      ```
+      {
+        "data": {
+          "accessToken":                     
+             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY5MjEzMzc5OSwiZXhwIjoxNjkyMTM3Mzk5fQ.dSF2dIzRj2vK8E9DOI1GvCaoPFnR9QCtUoYhj5YeYWw",
+          "refreshToken":         
+             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjQsImlhdCI6MTY5MjEzMzc5OSwiZXhwIjoxNjkyOTk3Nzk5fQ.nNdsbNslCzj1McloPxtaIR_898DSL1c9cnIde2PkI3Q"
+        },
+        "message": "성공",
+        "code": "success"
+      }
+      
+      ```
+    - fail
+      ```
+      이메일 유효성 검사
+      {
+        "code": "fail",
+        "message": "이메일에 @가 포함되지 않았습니다. 다시 입력해주세요!"
+      }
+      비밀번호 유효성 검사
+      {
+        "code": "fail",
+        "message": "비밀번호가 일치하지 않습니다.!"
+      } 
+
+      이메일 검사
+      {
+        "code": "fail",
+        "message": "이미 등록된 이메일이 없습니다."
+      }
+      ```
+
+
 
 
 # 원티드 프리온보딩 백엔드 인턴십 - 선발 과제
