@@ -51,10 +51,30 @@ public class UserServiceImpl implements UserService {
     public void login(String email, String password) {
 
         if(validate(email,password)) {
-            String encodePW = webSecurityConfig.getPasswordEncoder().encode(password);
 
-            userRepository.save(UserConverter.to(email, encodePW));
+            UserEntity userEntity = userRepository.findByEmail(email);
+            if(userEntity == null){
+                throw new IllegalArgumentException("등록된 이메일이 없습니다. 다시 입력해주세요!");
+            }
+
+            if(pwcheck(password, userEntity.getPassowrd())){
+                //토큰 리턴
+                System.out.println("같다");
+            }else{
+                throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.!");
+            }
+
+
         }
 
     }
+
+    @Override
+    public boolean pwcheck(String password, String dbPw){
+        boolean check = webSecurityConfig.getPasswordEncoder().matches(password, dbPw);
+        return check;
+
+
+    }
+
 }

@@ -29,4 +29,12 @@ public class UserController {
 
         return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.SUCCESS);
     }
+
+    @PostMapping("/login")
+    public ApiResponse<ApiResponse.SuccessBody<Void>> userLogin(@RequestBody UserJoinRequest request){
+
+        userService.login(request.getEmail(),request.getPassword());
+
+        return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.SUCCESS);
+    }
 }
