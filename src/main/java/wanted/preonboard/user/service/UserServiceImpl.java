@@ -4,6 +4,7 @@ package wanted.preonboard.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import wanted.preonboard.config.WebSecurityConfig;
 import wanted.preonboard.user.repository.UserRepository;
 import wanted.preonboard.user.support.converter.UserConverter;
 
@@ -12,12 +13,13 @@ import wanted.preonboard.user.support.converter.UserConverter;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
+    private final WebSecurityConfig webSecurityConfig;
 
     @Override
     public void join(String email, String password) {
         if(validate(email,password)) {
-            userRepository.save(UserConverter.to(email, password));
+            String encodePW = webSecurityConfig.getPasswordEncoder().encode(password);
+            userRepository.save(UserConverter.to(email, encodePW));
         }
     }
 
