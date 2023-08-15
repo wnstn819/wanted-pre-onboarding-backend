@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wanted.preonboard.board.entity.BoardEntity;
 import wanted.preonboard.board.model.request.BoardCreateRequest;
+import wanted.preonboard.board.model.request.BoardUpdateRequest;
 import wanted.preonboard.board.service.BoardService;
 import wanted.preonboard.user.model.request.UserJoinRequest;
 import wanted.preonboard.user.support.ApiResponse;
@@ -39,10 +40,8 @@ public class BoardController {
     }
 
     @PutMapping()
-    public ApiResponse<ApiResponse.SuccessBody<Void>> updateBoard(@RequestBody UserJoinRequest request){
-
-
-        return ApiResponseGenerator.success(HttpStatus.OK, MessageCode.SUCCESS);
+    public ApiResponse<ApiResponse.SuccessBody<BoardEntity>> updateBoard(@RequestHeader("Token") String token,@RequestBody BoardUpdateRequest request){
+        return ApiResponseGenerator.success(boardService.update(token,request),HttpStatus.OK, MessageCode.SUCCESS);
     }
 
     @DeleteMapping()

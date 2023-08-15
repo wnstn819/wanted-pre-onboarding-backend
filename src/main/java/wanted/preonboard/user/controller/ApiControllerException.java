@@ -28,4 +28,11 @@ public class ApiControllerException {
         loggingHandler.writeLog(ex, request);
         return ApiResponseGenerator.fail(FAIL_CODE, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ApiResponse<ApiResponse.FailureBody> handleUpdateException(Exception ex, HttpServletRequest request) {
+        loggingHandler.writeLog(ex, request);
+        return ApiResponseGenerator.fail(FAIL_CODE, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
