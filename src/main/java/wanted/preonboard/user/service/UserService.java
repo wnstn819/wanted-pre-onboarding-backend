@@ -4,4 +4,5 @@ public interface UserService {
     public void join(String email, String password);
 
     boolean validate(String email, String password);
+    boolean duplicatedCheck(String email);
 }

@@ -6,4 +6,5 @@ import wanted.preonboard.user.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
 
+    UserEntity findByEmail(String email);
 }
