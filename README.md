@@ -5,7 +5,7 @@
     
 ### 2. 애플리케이션의 실행 방법 (엔드포인트 호출 방법 포함)
 
-http://ec2-3-37-91-205.ap-northeast-2.compute.amazonaws.com:8080/endpoint
+http://ec2-3-37-91-205.ap-northeast-2.compute.amazonaws.com:8080/{endpoint}
 해당 주소로 배포가 되었음.
 API명세를 보고 endpoint를 확인, 사용하면 됩니다.
 
@@ -14,6 +14,8 @@ API명세를 보고 endpoint를 확인, 사용하면 됩니다.
  ![image](https://github.com/wnstn819/wanted-pre-onboarding-backend/assets/48230951/efa7c1ab-059d-4937-9b52-58c2b003834b)
     
 ### 4. 구현한 API의 동작을 촬영한 데모 영상 링크
+
+https://youtu.be/GjLznWuTiHs
 
 ### 5. 구현 방법 및 이유에 대한 간략한 설명
 
