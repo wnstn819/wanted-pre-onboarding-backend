@@ -5,12 +5,30 @@
     
 ### 2. 애플리케이션의 실행 방법 (엔드포인트 호출 방법 포함)
 
+http://ec2-3-37-91-205.ap-northeast-2.compute.amazonaws.com:8080/endpoint
+해당 주소로 배포가 되었음.
+API명세를 보고 endpoint를 확인, 사용하면 됩니다.
+
+
 ### 3. 데이터베이스 테이블 구조
  ![image](https://github.com/wnstn819/wanted-pre-onboarding-backend/assets/48230951/efa7c1ab-059d-4937-9b52-58c2b003834b)
     
 ### 4. 구현한 API의 동작을 촬영한 데모 영상 링크
 
 ### 5. 구현 방법 및 이유에 대한 간략한 설명
+
+회원가입 (api/v1/join) - POST - 이메일과 패스워드를 유효성 검사를 통해서 검사를 하고 패스워드를 암호화 해서 가입
+
+로그인 (api/v1/login) - POST - 가입된 정보를 통해 이메일과 패스워드를 확인해서 일치하면 유저에 대한 Jwt 토큰 발행, response로 전송
+
+게시글 생성 (api/v1/board) - GET - Header로 토큰을 받아서 토큰의 정보로 createId를 입력 받고, 해당 title과, content를 requestBody로 전송 받아서 게시글 생성
+
+게시글 조회 (api/v1/board) - GET - requestBody로 page, size, boardId를 전송 받아서 리스트를 조회 default값으로 page = 0, size = 10, boardId = 0임
+                              - boardId가 1부터 시작하기 때문에, boardId가 0일 경우에는 전체를 조회하도록 만들었고, 1부터는 해당 게시글의 정보를 가져옴
+                              
+게시글 수정 (api/v1/board) - PUT - Header로 토큰을 받아서 자신의 정보를 알 수 있고, 해당 정보로 createId와 비교해서 해당 게시글을 만든 사람과 일치하면 수정하게됨
+
+게시글 삭제 (api/v1/board) - DELETE - Header로 토큰을 받아서 자신의 정보를 알 수 있고, 해당 정보로 createId와 비교해서 해당 게시글을 만든 사람과 일치하면 삭제하게됨
 
 ### 6. API 명세(request/response 포함)
 
