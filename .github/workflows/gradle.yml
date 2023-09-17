@@ -78,8 +78,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name king_cicd_prac[만든 애플리케이션 이름] \
-        --deployment-group-name king_cicd[만든 애플리케이션 그룹 이름] \
+        --application-name king_cicd_prac[king_cicd_prac] \
+        --deployment-group-name king_cicd[king_cicd] \
         --file-exists-behavior OVERWRITE \
-        --s3-location bucket=king.cicd.prac[S3버킷이름],bundleType=zip,key=coinTalk.zipS[3버킷 속 압축파일] \ 
+        --s3-location bucket=king.cicd.prac[king.cicd.prac],bundleType=zip,key=coinTalk.zip[coinTalk.zip] \ 
         --region ap-northeast-2
