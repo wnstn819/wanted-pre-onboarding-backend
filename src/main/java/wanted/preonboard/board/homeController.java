@@ -12,7 +12,7 @@ public class homeController {
 
     @GetMapping("/")
     public String test(){
-        System.out.println("Test");
+        System.out.println("Test2");
         return "Hello CI/CD : " + name;
     }
 
