@@ -15,7 +15,6 @@ import wanted.preonboard.user.support.ApiResponseGenerator;
 public class ApiControllerException {
     private final LoggingHandler loggingHandler;
     private static final String FAIL_CODE = "fail";
-    private static final String JOIN_FAIL_CODE = "이메일과 비밀번호를 다시 한번 확인해주세요";
 
     @ExceptionHandler(Exception.class)
     public ApiResponse<ApiResponse.FailureBody> handleException(Exception ex, HttpServletRequest request) {
